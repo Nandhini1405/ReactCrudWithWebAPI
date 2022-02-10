@@ -31,7 +31,7 @@ const DCandidates = ({classes, ...props}) => {
 
   const onDelete = id => {
     if(window.confirm("Are you sure to delete this record?"))
-      props.deleteDCandidate(id, () => addToast("Deleted Successfully", { appearance: "danger" }))
+      props.deleteDCandidate(id, () => addToast("Deleted Successfully", { appearance: "info" }))
   }
   return (
     <Paper className={classes.paper} elevation={5}>
@@ -52,10 +52,10 @@ const DCandidates = ({classes, ...props}) => {
                     </TableHead>
                     <TableBody>
                         {
-                            props.DCandidateList.map((record, index) => {
+                            props.dCandidateList.map((record, index) => {
                                 return (<TableRow key={index} hover>
                                     <TableCell>{record.fullName}</TableCell>
-                                    <TableCell>{record.Mobile}</TableCell>
+                                    <TableCell>{record.mobile}</TableCell>
                                     <TableCell>{record.bloodGroup}</TableCell>
                                     <TableCell>
                                       <ButtonGroup variant="text">
@@ -76,7 +76,7 @@ const DCandidates = ({classes, ...props}) => {
 };
 
 const mapStateToProps = (state) => ({
-  DCandidateList: state.dCandidate.list,
+  dCandidateList: state.dCandidate.list,
 });
 
 const mapActionToProps = {

@@ -56,9 +56,11 @@ const DCandidateForm = ({ classes, ...props }) => {
       temp.email = /^$|.+@.+..+/.test(fieldValues.email)
         ? ""
         : "Email is not valid";
+
     setErrors({
       ...temp,
     });
+
     if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
 
@@ -71,7 +73,7 @@ const DCandidateForm = ({ classes, ...props }) => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     if (validate()) {
       const onSuccess = () => {
@@ -79,9 +81,13 @@ const DCandidateForm = ({ classes, ...props }) => {
         addToast("Submitted Successfully", { appearance: "success" });
       };
       if (props.currentId == 0)
-        props.createDCandidate(values, onSuccess);
-      else
-        props.updateDCandidate(props.currentId, values, onSuccess);
+      {
+       props.createDCandidate(values, addToast("Submitted Successfully", { appearance: "success" }));
+       resetForm();
+      }       
+      else {
+       props.updateDCandidate(props.currentId, values, onSuccess);
+      }
     }
   };
 
