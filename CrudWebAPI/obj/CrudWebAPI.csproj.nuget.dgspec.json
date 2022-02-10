@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebApi\\CrudWebAPI.csproj": {}
+    "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebAPI\\CrudWebAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebApi\\CrudWebAPI.csproj": {
+    "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebAPI\\CrudWebAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebApi\\CrudWebAPI.csproj",
+        "projectUniqueName": "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebAPI\\CrudWebAPI.csproj",
         "projectName": "CrudWebAPI",
-        "projectPath": "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebApi\\CrudWebAPI.csproj",
+        "projectPath": "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebAPI\\CrudWebAPI.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebApi\\obj\\",
+        "outputPath": "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebAPI\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

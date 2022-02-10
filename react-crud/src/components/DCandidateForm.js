@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   Button,
   FormControl,
+  FormHelperText,
   Grid,
   InputLabel,
   MenuItem,
@@ -37,7 +38,26 @@ const initialFieldValues = {
 };
 
 const DCandidateForm = ({ classes, ...props }) => {
-  const { values, setValues, handleInputChange } = useForm(initialFieldValues);
+  const validate = (fieldValues = values) => {
+    let temp = {};
+    if ("fullName" in fieldValues)
+      temp.fullName = fieldValues.fullName ? "" : "This Field is required";
+    if ("bloodGroup" in fieldValues)
+      temp.bloodGroup = fieldValues.bloodGroup ? "" : "This Field is required";
+    if ("mobile" in fieldValues)
+      temp.mobile = fieldValues.mobile ? "" : "This Field is required";
+    if ("email" in fieldValues)
+      temp.email = /^$|.+@.+..+/.test(fieldValues.email)
+        ? ""
+        : "Email is not valid";
+    setError({
+      ...temp,
+    });
+    if (fieldValues == values) return Object.values(temp).every((x) => x == "");
+  };
+
+  const { values, setValues, errors, setError, handleInputChange } =
+    useForm(initialFieldValues, validate);
 
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
@@ -45,25 +65,48 @@ const DCandidateForm = ({ classes, ...props }) => {
     setLabelWidth(inputLabel.current.offsetWidth);
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (validate()) {
+      window.alert("Validation succeeded");
+    }
+  };
+
   return (
-    <form autoComplete="off" noValidate className={classes.root}>
+    <form
+      autoComplete="off"
+      noValidate
+      className={classes.root}
+      onSubmit={handleSubmit}
+    >
       <Grid container>
         <Grid item xs={6}>
           <TextField
             name="fullName"
             variant="outlined"
             label="Full Name"
+            autoComplete="chrome-off"
             value={values.fullName}
             onChange={handleInputChange}
+            {...(errors.fullName && {
+              error: true,
+              helperText: errors.fullName,
+            })}
           />
           <TextField
             name="email"
             variant="outlined"
             label="Email"
+            autoComplete="chrome-off"
             value={values.email}
             onChange={handleInputChange}
+            {...(errors.email && { error: true, helperText: errors.email })}
           />
-          <FormControl variant="outlined" className={classes.formControl}>
+          <FormControl
+            variant="outlined"
+            className={classes.formControl}
+            {...(errors.bloodGroup && { error: true })}
+          >
             <InputLabel ref={inputLabel}>Blood Group</InputLabel>
             <Select
               name="bloodGroup"
@@ -89,6 +132,9 @@ const DCandidateForm = ({ classes, ...props }) => {
               <MenuItem value="A2B+">A2B+</MenuItem>
               <MenuItem value="A2B-">A2B-</MenuItem>
             </Select>
+            {errors.bloodGroup && (
+              <FormHelperText>{errors.bloodGroup}</FormHelperText>
+            )}
           </FormControl>
         </Grid>
         <Grid item xs={6}>
@@ -96,8 +142,10 @@ const DCandidateForm = ({ classes, ...props }) => {
             name="mobile"
             variant="outlined"
             label="Mobile"
+            autoComplete="chrome-off"
             value={values.mobile}
             onChange={handleInputChange}
+            {...(errors.mobile && { error: true, helperText: errors.mobile })}
           />
           <TextField
             name="age"

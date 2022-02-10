@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fw08KJHfnWHkTROyNxvnIM6+8HJJMzJXR+AvQNVlk7UKeCw+P94EDw738AzTxdmK3cl13mcM7/E51n2ap0yTGg==",
+  "dgSpecHash": "gmaK9dFb1zCMZPWTzmwkGxI2G7QmvE2/jyxuFWdK+TyzuOkExA7tbhKzZ5I7RaSLK4S5lCh4Gk3uD/ZGNf5Sww==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebApi\\CrudWebAPI.csproj",
+  "projectFilePath": "C:\\Users\\Administrator\\Documents\\Technical_Training\\React\\Projects\\ReactWithWebApi\\CrudWebAPI\\CrudWebAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Administrator\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.aspnetcore.cors\\2.2.0\\microsoft.aspnetcore.cors.2.2.0.nupkg.sha512",
