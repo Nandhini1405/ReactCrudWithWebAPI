@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import {
   Button,
   FormControl,
@@ -11,6 +12,8 @@ import {
   withStyles,
 } from "@material-ui/core";
 import useForm from "./useForm";
+import * as actions from "../actions/dCandidate";
+import { useToasts } from "react-toast-notifications";
 
 const styles = (theme) => ({
   root: {
@@ -38,8 +41,11 @@ const initialFieldValues = {
 };
 
 const DCandidateForm = ({ classes, ...props }) => {
+  // Toast
+  const { addToast } = useToasts();
+
   const validate = (fieldValues = values) => {
-    let temp = {};
+    let temp = { ...errors };
     if ("fullName" in fieldValues)
       temp.fullName = fieldValues.fullName ? "" : "This Field is required";
     if ("bloodGroup" in fieldValues)
@@ -50,14 +56,14 @@ const DCandidateForm = ({ classes, ...props }) => {
       temp.email = /^$|.+@.+..+/.test(fieldValues.email)
         ? ""
         : "Email is not valid";
-    setError({
+    setErrors({
       ...temp,
     });
     if (fieldValues == values) return Object.values(temp).every((x) => x == "");
   };
 
-  const { values, setValues, errors, setError, handleInputChange } =
-    useForm(initialFieldValues, validate);
+  const { values, setValues, errors, setErrors, handleInputChange, resetForm } =
+    useForm(initialFieldValues, validate, props.setCurrentId);
 
   const inputLabel = React.useRef(null);
   const [labelWidth, setLabelWidth] = React.useState(0);
@@ -68,9 +74,25 @@ const DCandidateForm = ({ classes, ...props }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      window.alert("Validation succeeded");
+      const onSuccess = () => {
+        resetForm();
+        addToast("Submitted Successfully", { appearance: "success" });
+      };
+      if (props.currentId == 0)
+        props.createDCandidate(values, onSuccess);
+      else
+        props.updateDCandidate(props.currentId, values, onSuccess);
     }
   };
+
+  useEffect(() => {
+    if (props.currentId != 0) {
+      setValues({
+        ...props.dCandidateList.find((x) => x.id == props.currentId),
+      });
+      setErrors({});
+    }
+  }, [props.currentId]);
 
   return (
     <form
@@ -174,6 +196,7 @@ const DCandidateForm = ({ classes, ...props }) => {
               variant="contained"
               color="primary"
               className={classes.smMargin}
+              onClick={resetForm}
             >
               Reset
             </Button>
@@ -184,4 +207,16 @@ const DCandidateForm = ({ classes, ...props }) => {
   );
 };
 
-export default withStyles(styles)(DCandidateForm);
+const mapStateToProps = (state) => ({
+  dCandidateList: state.dCandidate.list,
+});
+
+const mapActionToProps = {
+  createDCandidate: actions.create,
+  updateDCandidate: actions.update,
+};
+
+export default connect(
+  mapStateToProps,
+  mapActionToProps
+)(withStyles(styles)(DCandidateForm));
